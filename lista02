@@ -1,0 +1,76 @@
+-- 1) tabela 1 --
+SELECT
+ pedidos.pedido_id,
+ pedidos.data_pedido,
+ pedidos.total,
+ clientes.nome AS cliente_nome,
+ clientes.email AS cliente_email
+FROM 
+ pedidos
+INNER JOIN 
+ clientes ON pedidos.cliente_id = clientes.cliente_id;
+
+-- 3) tabela 3 --
+SELECT 
+ t.transacao_id,
+ t.conta_id,
+ t.tipo AS tipo_transacao,
+ t.valor,
+ t.data_transacao,
+ t.descricao,
+ o.categoria AS categoria_orcamento
+FROM 
+ transacoes t
+LEFT JOIN 
+ orcamentos o ON t.conta_id = o.orcamento_id;
+
+-- 2) tabela 2 --
+SELECT 
+ c.nome AS cliente_nome,
+ c.email AS cliente_email,
+ ca.nome AS campanha_nome,
+ ca.descricao AS campanha_descricao,
+ pc.data_participacao
+FROM 
+ participacoes_campanha pc
+INNER JOIN 
+ clientes c ON pc.cliente_id = c.cliente_id
+INNER JOIN 
+ campanhas ca ON pc.campanha_id = ca.campanha_id;
+
+-- 4) tabela 4 --
+SELECT 
+ p.paciente_id,
+ p.nome AS paciente_nome,
+ p.data_nascimento,
+ p.sexo,
+ p.telefone,
+ p.endereco,
+ pr.prontuario_id,
+ pr.data_consulta,
+ pr.medico,
+ pr.diagnostico,
+ pr.prescricao,
+ pr.observacoes
+FROM 
+ pacientes p
+LEFT JOIN 
+prontuarios pr ON p.paciente_id = pr.paciente_id;
+
+-- 5) tabela 5 --
+SELECT 
+ f.fornecedor_id,
+ f.nome AS fornecedor_nome,
+ f.contato,
+ f.telefone,
+ f.endereco,
+ p.produto_id,
+ p.nome AS produto_nome,
+ p.preco,
+ p.estoque
+FROM 
+ fornecedores f
+LEFT JOIN 
+ produtos p ON f.fornecedor_id = p.fornecedor_id
+ORDER BY 
+ f.fornecedor_id;
